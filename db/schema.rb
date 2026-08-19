@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_08_19_150631) do
+ActiveRecord::Schema[7.0].define(version: 2026_08_19_150710) do
+  create_table "check_ins", force: :cascade do |t|
+    t.integer "property_id", null: false
+    t.integer "guest_id", null: false
+    t.string "item_description", null: false
+    t.string "claim_code", null: false
+    t.string "status", default: "checked_in", null: false
+    t.datetime "ready_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_check_ins_on_guest_id"
+    t.index ["property_id", "claim_code"], name: "index_check_ins_on_property_id_and_claim_code", unique: true
+    t.index ["property_id"], name: "index_check_ins_on_property_id"
+  end
+
   create_table "guests", force: :cascade do |t|
     t.integer "property_id", null: false
     t.string "name", null: false
@@ -30,5 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_08_19_150631) do
     t.index ["slug"], name: "index_properties_on_slug", unique: true
   end
 
+  add_foreign_key "check_ins", "guests"
+  add_foreign_key "check_ins", "properties"
   add_foreign_key "guests", "properties"
 end

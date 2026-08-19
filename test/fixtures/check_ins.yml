@@ -1,0 +1,13 @@
+maya_coat:
+  property: harborview
+  guest: maya
+  item_description: black wool coat
+  claim_code: HBV4K2
+  status: checked_in
+
+theo_luggage:
+  property: sundial
+  guest: theo
+  item_description: two-piece luggage set
+  claim_code: SND9F1
+  status: checked_in
