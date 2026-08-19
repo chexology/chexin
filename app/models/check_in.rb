@@ -14,6 +14,11 @@ class CheckIn < ApplicationRecord
                          length: { is: CLAIM_CODE_LENGTH },
                          uniqueness: { scope: :property_id }
 
+  def mark_ready!
+    update!(status: :ready, ready_at: Time.current)
+    NotifyGuestJob.perform_later(self)
+  end
+
   private
 
   # Claim codes are short and human-readable, so collisions within a property
