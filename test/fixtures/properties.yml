@@ -1,0 +1,11 @@
+harborview:
+  name: Harborview Hotel
+  slug: harborview-hotel
+  time_zone: America/New_York
+  active: true
+
+sundial:
+  name: Sundial Resort
+  slug: sundial-resort
+  time_zone: America/Los_Angeles
+  active: true
