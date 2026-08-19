@@ -11,7 +11,8 @@ Property.delete_all
 
 PROPERTIES = [
   { name: "Harborview Hotel", slug: "harborview-hotel", time_zone: "America/New_York" },
-  { name: "Sundial Resort", slug: "sundial-resort", time_zone: "America/Los_Angeles" },
+  { name: "Sundial Resort", slug: "sundial-resort", time_zone: "America/Los_Angeles",
+    quiet_hours_start: "21:00", quiet_hours_end: "08:00" },
   { name: "Lakeshore Club", slug: "lakeshore-club", time_zone: "America/Chicago" },
   { name: "Aurora Lodge", slug: "aurora-lodge", time_zone: "Pacific/Honolulu" }
 ].freeze
