@@ -1,0 +1,20 @@
+<h1>Chexin — Properties</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Time zone</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @properties.each do |property| %>
+      <tr>
+        <td><%= property.name %></td>
+        <td><%= property.time_zone %></td>
+        <td><%= link_to "Activity", property_activity_path(property.slug) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,52 @@
+<p><%= link_to "← All properties", root_path %></p>
+
+<h1><%= @property.name %> — Recent activity</h1>
+<p class="subtle">Times shown in <%= @property.time_zone %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Guest</th>
+      <th>Item</th>
+      <th>Claim code</th>
+      <th>Status</th>
+      <th>Ready at</th>
+      <th>Notifications</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @check_ins.each do |check_in| %>
+      <tr>
+        <td><%= check_in.guest.name %></td>
+        <td><%= check_in.item_description %></td>
+        <td><code><%= check_in.claim_code %></code></td>
+        <td><span class="status status-<%= check_in.status %>"><%= check_in.status.humanize %></span></td>
+        <td>
+          <%= check_in.ready_at&.in_time_zone(@property.time_zone)&.strftime("%b %-d, %-l:%M %p") %>
+        </td>
+        <td>
+          <% if check_in.notification_logs.any? %>
+            <ul class="logs">
+              <% check_in.notification_logs.each do |log| %>
+                <li>
+                  <span class="status status-<%= log.status %>"><%= log.status %></span>
+                  <%= log.channel %>
+                  <% if log.detail.present? %>— <%= log.detail %><% end %>
+                  <span class="subtle">(<%= log.created_at.in_time_zone(@property.time_zone).strftime("%b %-d, %-l:%M %p") %>)</span>
+                </li>
+              <% end %>
+            </ul>
+          <% else %>
+            <span class="subtle">none</span>
+          <% end %>
+        </td>
+        <td>
+          <% if check_in.checked_in? %>
+            <%= button_to "Mark ready", mark_ready_check_in_path(check_in), method: :post %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

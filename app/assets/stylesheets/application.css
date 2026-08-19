@@ -2,14 +2,55 @@
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
  *= require_tree .
  *= require_self
  */
+
+body {
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: 2rem auto;
+  max-width: 72rem;
+  padding: 0 1rem;
+  color: #222;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border-bottom: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.subtle {
+  color: #777;
+  font-size: 0.85em;
+}
+
+.logs {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.status {
+  border-radius: 3px;
+  font-size: 0.8em;
+  padding: 0.1rem 0.35rem;
+}
+
+.status-checked_in { background: #eef; }
+.status-ready, .status-sent { background: #e6f7e6; }
+.status-claimed { background: #eee; }
+.status-failed { background: #fde3e3; }
+.status-skipped { background: #fff3cd; }
+
+.notice {
+  background: #e6f7e6;
+  border: 1px solid #b8e0b8;
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+}
