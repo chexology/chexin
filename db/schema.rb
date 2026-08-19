@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_08_19_150710) do
+ActiveRecord::Schema[7.0].define(version: 2026_08_19_150738) do
   create_table "check_ins", force: :cascade do |t|
     t.integer "property_id", null: false
     t.integer "guest_id", null: false
@@ -34,6 +34,16 @@ ActiveRecord::Schema[7.0].define(version: 2026_08_19_150710) do
     t.index ["property_id"], name: "index_guests_on_property_id"
   end
 
+  create_table "notification_logs", force: :cascade do |t|
+    t.integer "check_in_id", null: false
+    t.string "channel", default: "sms", null: false
+    t.string "status", null: false
+    t.string "detail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["check_in_id"], name: "index_notification_logs_on_check_in_id"
+  end
+
   create_table "properties", force: :cascade do |t|
     t.string "name", null: false
     t.string "slug", null: false
@@ -47,4 +57,5 @@ ActiveRecord::Schema[7.0].define(version: 2026_08_19_150710) do
   add_foreign_key "check_ins", "guests"
   add_foreign_key "check_ins", "properties"
   add_foreign_key "guests", "properties"
+  add_foreign_key "notification_logs", "check_ins"
 end
