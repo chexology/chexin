@@ -1,24 +1,42 @@
-# README
+# Chexin
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A tiny valet / coat-check service for hotels and clubs.
 
-Things you may want to cover:
+## The domain in five lines
 
-* Ruby version
+1. A **Property** is a hotel, resort, or club, each in its own time zone.
+2. **Guests** check items (coats, luggage) at a property, creating a **CheckIn** with a 6-character claim code.
+3. Staff hit `POST /check_ins/:id/mark_ready` when an item is ready for pickup.
+4. `NotifyGuestJob` texts the guest via a mock Twilio client (nothing is really sent) and records a **NotificationLog** (`sent` / `failed`).
+5. `/properties/:slug/activity` shows recent check-ins and their notification history.
 
-* System dependencies
+## Setup
 
-* Configuration
+```sh
+bin/setup          # bundle install + db:prepare
+bin/rails db:seed  # 4 properties, guests, and check-ins in mixed states
+```
 
-* Database creation
+## Run
 
-* Database initialization
+```sh
+bin/rails s
+```
 
-* How to run the test suite
+Then open <http://localhost:3000> and pick a property.
 
-* Services (job queues, cache servers, search engines, etc.)
+## Test
 
-* Deployment instructions
+```sh
+bin/rails test
+```
 
-* ...
+## Debugging tip: run the job inline
+
+The mock SMS job runs on the async ActiveJob adapter in development. To step
+through it synchronously (e.g. with `debugger`), switch the adapter to inline
+in `config/environments/development.rb`:
+
+```ruby
+config.active_job.queue_adapter = :inline
+```
