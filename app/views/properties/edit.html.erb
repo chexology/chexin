@@ -28,5 +28,23 @@
     <%= f.label :active %>
   </p>
 
+  <fieldset>
+    <legend>Quiet hours</legend>
+    <p class="subtle">
+      Daily window, in the property's local time, during which guest SMS are
+      held. Leave both blank to disable.
+    </p>
+
+    <p>
+      <%= f.label :quiet_hours_start, "Start" %><br>
+      <%= f.time_field :quiet_hours_start %>
+    </p>
+
+    <p>
+      <%= f.label :quiet_hours_end, "End" %><br>
+      <%= f.time_field :quiet_hours_end %>
+    </p>
+  </fieldset>
+
   <p><%= f.submit "Save settings" %></p>
 <% end %>
