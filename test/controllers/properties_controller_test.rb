@@ -18,4 +18,28 @@ class PropertiesControllerTest < ActionDispatch::IntegrationTest
       get property_activity_path("nowhere-inn")
     end
   end
+
+  test "edit renders the settings form" do
+    get edit_property_path(properties(:harborview).slug)
+    assert_response :success
+    assert_select "form"
+  end
+
+  test "update saves settings and redirects to activity" do
+    property = properties(:harborview)
+
+    patch property_path(property.slug), params: { property: { name: "Harborview Grand Hotel" } }
+
+    assert_redirected_to property_activity_path(property.slug)
+    assert_equal "Harborview Grand Hotel", property.reload.name
+  end
+
+  test "update rejects an invalid time zone" do
+    property = properties(:harborview)
+
+    patch property_path(property.slug), params: { property: { time_zone: "Nope/Nowhere" } }
+
+    assert_response :unprocessable_entity
+    assert_equal "America/New_York", property.reload.time_zone
+  end
 end

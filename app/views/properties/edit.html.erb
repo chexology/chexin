@@ -1,0 +1,32 @@
+<p><%= link_to "← Back to activity", property_activity_path(@property.slug) %></p>
+
+<h1><%= @property.name %> — Settings</h1>
+
+<%= form_with model: @property, url: property_path(@property.slug) do |f| %>
+  <% if @property.errors.any? %>
+    <div class="errors">
+      <ul>
+        <% @property.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :time_zone, "Time zone (IANA identifier)" %><br>
+    <%= f.text_field :time_zone %>
+  </p>
+
+  <p>
+    <%= f.check_box :active %>
+    <%= f.label :active %>
+  </p>
+
+  <p><%= f.submit "Save settings" %></p>
+<% end %>

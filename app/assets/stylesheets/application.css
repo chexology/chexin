@@ -48,6 +48,13 @@ th, td {
 .status-failed { background: #fde3e3; }
 .status-skipped { background: #fff3cd; }
 
+.errors {
+  background: #fde3e3;
+  border: 1px solid #f5b5b5;
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+}
+
 .notice {
   background: #e6f7e6;
   border: 1px solid #b8e0b8;

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_08_19_150738) do
+ActiveRecord::Schema[7.0].define(version: 2026_08_19_151541) do
   create_table "check_ins", force: :cascade do |t|
     t.integer "property_id", null: false
     t.integer "guest_id", null: false
@@ -51,6 +51,8 @@ ActiveRecord::Schema[7.0].define(version: 2026_08_19_150738) do
     t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.time "quiet_hours_start"
+    t.time "quiet_hours_end"
     t.index ["slug"], name: "index_properties_on_slug", unique: true
   end
 

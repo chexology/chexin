@@ -6,6 +6,7 @@
       <th>Property</th>
       <th>Time zone</th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +15,7 @@
         <td><%= property.name %></td>
         <td><%= property.time_zone %></td>
         <td><%= link_to "Activity", property_activity_path(property.slug) %></td>
+        <td><%= link_to "Edit", edit_property_path(property.slug) %></td>
       </tr>
     <% end %>
   </tbody>

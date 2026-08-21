@@ -1,6 +1,9 @@
 <p><%= link_to "← All properties", root_path %></p>
 
 <h1><%= @property.name %> — Recent activity</h1>
+<p>
+  <%= link_to "Edit Property", edit_property_path(@property.slug) %>
+</p>
 <p class="subtle">Times shown in <%= @property.time_zone %></p>
 
 <table>
