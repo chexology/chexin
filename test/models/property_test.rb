@@ -26,4 +26,20 @@ class PropertyTest < ActiveSupport::TestCase
     assert_not property.valid?
     assert_includes property.errors[:slug], "has already been taken"
   end
+
+  test "quiet_now? is true during the quiet window" do
+    travel_to Time.utc(2026, 6, 1, 22, 15) do
+      assert_predicate properties(:sundial), :quiet_now?
+    end
+  end
+
+  test "quiet_now? is false outside the quiet window" do
+    travel_to Time.utc(2026, 6, 1, 12, 0) do
+      assert_not properties(:sundial).quiet_now?
+    end
+  end
+
+  test "quiet_now? is false when quiet hours are not configured" do
+    assert_not properties(:harborview).quiet_now?
+  end
 end

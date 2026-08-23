@@ -28,6 +28,6 @@ class PropertiesController < ApplicationController
   private
 
   def property_params
-    params.require(:property).permit(:name, :time_zone, :active)
+    params.require(:property).permit(:name, :time_zone, :active, :quiet_hours_start, :quiet_hours_end)
   end
 end

@@ -9,6 +9,11 @@ class NotifyGuestJob < ApplicationJob
   end
 
   def perform(check_in)
+    if check_in.property.quiet_now?
+      check_in.notification_logs.create!(channel: "sms", status: :skipped, detail: "quiet hours")
+      return
+    end
+
     guest = check_in.guest
     body = "Hi #{guest.name}, your #{check_in.item_description} is ready for pickup at " \
            "#{check_in.property.name}. Claim code: #{check_in.claim_code}."

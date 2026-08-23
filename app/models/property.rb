@@ -9,6 +9,19 @@ class Property < ApplicationRecord
 
   scope :active, -> { where(active: true) }
 
+  # True while the property is inside its configured quiet-hours window,
+  # during which guest SMS should be held.
+  def quiet_now?
+    return false if quiet_hours_start.nil? && quiet_hours_end.nil?
+
+    now = Time.current
+    starts_at = now.change(hour: quiet_hours_start.hour, min: quiet_hours_start.min)
+    ends_at = now.change(hour: quiet_hours_end.hour, min: quiet_hours_end.min)
+    ends_at += 1.day if ends_at <= starts_at # window may span midnight
+
+    now >= starts_at && now <= ends_at
+  end
+
   private
 
   # time_zone holds an IANA identifier, e.g. "America/New_York".

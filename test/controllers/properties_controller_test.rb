@@ -34,6 +34,18 @@ class PropertiesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Harborview Grand Hotel", property.reload.name
   end
 
+  test "update saves quiet hours" do
+    property = properties(:harborview)
+
+    patch property_path(property.slug),
+          params: { property: { quiet_hours_start: "22:00", quiet_hours_end: "07:00" } }
+
+    assert_redirected_to property_activity_path(property.slug)
+    property.reload
+    assert_equal "22:00", property.quiet_hours_start.strftime("%H:%M")
+    assert_equal "07:00", property.quiet_hours_end.strftime("%H:%M")
+  end
+
   test "update rejects an invalid time zone" do
     property = properties(:harborview)
 

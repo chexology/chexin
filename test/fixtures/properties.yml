@@ -9,3 +9,5 @@ sundial:
   slug: sundial-resort
   time_zone: America/Los_Angeles
   active: true
+  quiet_hours_start: "21:00"
+  quiet_hours_end: "08:00"
